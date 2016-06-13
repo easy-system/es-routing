@@ -24,10 +24,10 @@ The required elements of route configuration are:
 - The name of route
 - The route path
 - The full name of controller for this route, exactly as it was registered in 
-  the system services. This name must be specified in the defaults section.
+  the system services. This name must be specified in the `defaults` section.
   
 The name of the controller action can also be optionally specified in the 
-defaults section.
+`defaults` section.
 
 ```
 $systemConfig = [
