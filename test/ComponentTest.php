@@ -21,10 +21,10 @@ class ComponentTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('#\d+.\d+.\d+#', $version);
     }
 
-    public function testGetServicesConfig()
+    public function testGetListenersConfig()
     {
         $component = new Component();
-        $config    = $component->getServicesConfig();
+        $config    = $component->getListenersConfig();
         $this->assertInternalType('array', $config);
     }
 

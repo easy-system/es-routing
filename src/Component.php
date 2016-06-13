@@ -19,11 +19,11 @@ use Es\System\SystemEvent;
 class Component implements ComponentInterface
 {
     /**
-     * The configuration of services.
+     * The configuration of listeners.
      *
      * @var array
      */
-    protected $servicesConfig = [
+    protected $listenersConfig = [
         'ConfigureRouterListener' => 'Es\Routing\Listener\ConfigureRouterListener',
         'RouteMatchListener'      => 'Es\Routing\Listener\RouteMatchListener',
     ];
@@ -66,13 +66,13 @@ class Component implements ComponentInterface
     }
 
     /**
-     * Gets the configuration of services.
+     * Gets the configuration of listeners.
      *
-     * @return array The configuration of services
+     * @return array The configuration of listeners
      */
-    public function getServicesConfig()
+    public function getListenersConfig()
     {
-        return $this->servicesConfig;
+        return $this->listenersConfig;
     }
 
     /**
