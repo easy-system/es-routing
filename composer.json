@@ -16,6 +16,7 @@
         "easy-system/es-events": "*",
         "easy-system/es-system": "*",
         "easy-system/es-modules": "*",
+        "easy-system/es-server": "*",
         "easy-system/es-cache": "*"
     },
     "autoload": {
