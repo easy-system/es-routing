@@ -9,9 +9,8 @@
  */
 namespace Es\Routing\Listener;
 
-use Es\Http\ServerInterface;
-use Es\Router\RouterInterface;
-use Es\Services\ServicesTrait;
+use Es\Routing\RouterTrait;
+use Es\Server\ServerTrait;
 use Es\System\SystemEvent;
 
 /**
@@ -19,73 +18,7 @@ use Es\System\SystemEvent;
  */
 class RouteMatchListener
 {
-    use ServicesTrait;
-
-    /**
-     * The router.
-     *
-     * @var \Es\Router\RouterInterface
-     */
-    protected $router;
-
-    /**
-     * The server.
-     *
-     * @var \Es\Http\ServerInterface
-     */
-    protected $server;
-
-    /**
-     * Sets the router.
-     *
-     * @param \Es\Router\RouterInterface $router The router
-     */
-    public function setRouter(RouterInterface $router)
-    {
-        $this->router = $router;
-    }
-
-    /**
-     * Gets the router.
-     *
-     * @param \Es\Router\RouterInterface The router
-     */
-    public function getRouter()
-    {
-        if (! $this->router) {
-            $services = $this->getServices();
-            $router   = $services->get('Router');
-            $this->setRouter($router);
-        }
-
-        return $this->router;
-    }
-
-    /**
-     * Sets the server.
-     *
-     * @param \Es\Http\ServerInterface $server The server
-     */
-    public function setServer(ServerInterface $server)
-    {
-        $this->server = $server;
-    }
-
-    /**
-     * Gets the server.
-     *
-     * @return \Es\Http\ServerInterface The server
-     */
-    public function getServer()
-    {
-        if (! $this->server) {
-            $services = $this->getServices();
-            $server   = $services->get('Server');
-            $this->setServer($server);
-        }
-
-        return $this->server;
-    }
+    use RouterTrait, ServerTrait;
 
     /**
      * Handle the requested route.

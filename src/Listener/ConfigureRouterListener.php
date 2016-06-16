@@ -12,9 +12,9 @@ namespace Es\Routing\Listener;
 use Es\Cache\Adapter\AbstractCache;
 use Es\Modules\ModulesEvent;
 use Es\Router\Route;
-use Es\Router\RouterInterface;
+use Es\Routing\RouterTrait;
 use Es\Services\ServicesTrait;
-use Es\System\ConfigInterface;
+use Es\System\ConfigTrait;
 use InvalidArgumentException;
 
 /**
@@ -22,14 +22,7 @@ use InvalidArgumentException;
  */
 class ConfigureRouterListener
 {
-    use ServicesTrait;
-
-    /**
-     * The router.
-     *
-     * @var \Es\Router\RouterInterface
-     */
-    protected $router;
+    use ConfigTrait, RouterTrait, ServicesTrait;
 
     /**
      * The cache.
@@ -37,39 +30,6 @@ class ConfigureRouterListener
      * @var \Es\Cache\Adapter\AbstractCache
      */
     protected $cache;
-
-    /**
-     * The system configuration.
-     *
-     * @var \Es\System\Config
-     */
-    protected $config;
-
-    /**
-     * Sets the router.
-     *
-     * @param \Es\Router\RouterInterface $router The router
-     */
-    public function setRouter(RouterInterface $router)
-    {
-        $this->router = $router;
-    }
-
-    /**
-     * Gets the router.
-     *
-     * @return \Es\Router\RouterInterface The router
-     */
-    public function getRouter()
-    {
-        if (! $this->router) {
-            $services = $this->getServices();
-            $router   = $services->get('Router');
-            $this->setRouter($router);
-        }
-
-        return $this->router;
-    }
 
     /**
      * Sets the cache.
@@ -98,32 +58,6 @@ class ConfigureRouterListener
     }
 
     /**
-     * Sets the system configuration.
-     *
-     * @param \Es\System\ConfigInterface $config The system configuration
-     */
-    public function setConfig(ConfigInterface $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Gets the system configuration.
-     *
-     * @return \Es\System\Config The system configuration
-     */
-    public function getConfig()
-    {
-        if (! $this->config) {
-            $services = $this->getServices();
-            $config   = $services->get('Config');
-            $this->setConfig($config);
-        }
-
-        return $this->config;
-    }
-
-    /**
      * Configures the router.
      * If the cache is enabled, restores the router from cache.
      *
@@ -146,7 +80,7 @@ class ConfigureRouterListener
             return;
         }
         $systemConfig = $this->getConfig();
-        $config = isset($systemConfig['router']) ? (array) $systemConfig['router'] : [];
+        $config       = isset($systemConfig['router']) ? (array) $systemConfig['router'] : [];
         if (isset($config['defaults'])) {
             $router->setDefaultParams((array) $config['defaults']);
         }

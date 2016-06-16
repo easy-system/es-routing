@@ -19,25 +19,6 @@ use Es\System\SystemConfig;
 
 class ConfigureRouterListenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetRouter()
-    {
-        $router   = new Router();
-        $listener = new ConfigureRouterListener();
-        $listener->setRouter($router);
-        $this->assertSame($router, $listener->getRouter());
-    }
-
-    public function testGetRouter()
-    {
-        $router   = new Router();
-        $services = new Services();
-        $services->set('Router', $router);
-
-        $listener = new ConfigureRouterListener();
-        $listener->setServices($services);
-        $this->assertSame($router, $listener->getRouter());
-    }
-
     public function testSetCache()
     {
         $adapter  = new FileCache();
@@ -66,32 +47,15 @@ class ConfigureRouterListenerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('system', $cache->getNamespace());
     }
 
-    public function testSetConfig()
-    {
-        $config   = new SystemConfig();
-        $listener = new ConfigureRouterListener();
-        $listener->setConfig($config);
-        $this->assertSame($config, $listener->getConfig());
-    }
-
-    public function testGetConfig()
-    {
-        $config   = new SystemConfig();
-        $services = new Services();
-        $services->set('Config', $config);
-
-        $listener = new ConfigureRouterListener();
-        $listener->setServices($services);
-        $this->assertSame($config, $listener->getConfig());
-    }
-
     public function testInvokeRestoreRouterFromCache()
     {
-        $stored = new Router();
-        $router = $this->getMock(Router::CLASS);
-        $cache  = $this->getMock(FileCache::CLASS);
+        $services = new Services();
+        $stored   = new Router();
+        $router   = $this->getMock(Router::CLASS);
+        $cache    = $this->getMock(FileCache::CLASS);
 
         $listener = $this->getMock(ConfigureRouterListener::CLASS, ['getCache']);
+        $listener->setServices($services);
         $listener->setRouter($router);
 
         $listener

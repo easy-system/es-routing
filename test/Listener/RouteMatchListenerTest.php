@@ -9,54 +9,15 @@
  */
 namespace Es\Routing\Test;
 
-use Es\Http\Server;
 use Es\Http\Uri;
 use Es\Router\Route;
 use Es\Router\Router;
 use Es\Routing\Listener\RouteMatchListener;
-use Es\Services\Services;
+use Es\Server\Server;
 use Es\System\SystemEvent;
 
 class RouteMatchListenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetRouter()
-    {
-        $router   = new Router();
-        $listener = new RouteMatchListener();
-        $listener->setRouter($router);
-        $this->assertSame($router, $listener->getRouter());
-    }
-
-    public function testGetRouter()
-    {
-        $router   = new Router();
-        $services = new Services();
-        $services->set('Router', $router);
-
-        $listener = new RouteMatchListener();
-        $listener->setServices($services);
-        $this->assertSame($router, $listener->getRouter());
-    }
-
-    public function testSetServer()
-    {
-        $server   = new Server();
-        $listener = new RouteMatchListener();
-        $listener->setServer($server);
-        $this->assertSame($server, $listener->getServer());
-    }
-
-    public function testGetServer()
-    {
-        $server   = new Server();
-        $services = new Services();
-        $services->set('Server', $server);
-
-        $listener = new RouteMatchListener();
-        $listener->setServices($services);
-        $this->assertSame($server, $listener->getServer());
-    }
-
     public function testInvoke()
     {
         $params = [
