@@ -9,7 +9,7 @@
  */
 namespace Es\Routing\Listener;
 
-use Es\Cache\Adapter\AbstractCache;
+use Es\Cache\AbstractCache;
 use Es\Modules\ModulesEvent;
 use Es\Router\Route;
 use Es\Routing\RouterTrait;
@@ -27,14 +27,14 @@ class ConfigureRouterListener
     /**
      * The cache.
      *
-     * @var \Es\Cache\Adapter\AbstractCache
+     * @var \Es\Cache\AbstractCache
      */
     protected $cache;
 
     /**
      * Sets the cache.
      *
-     * @param \Es\Cache\Adapter\AbstractCache $cache The cache
+     * @param \Es\Cache\AbstractCache $cache The cache
      */
     public function setCache(AbstractCache $cache)
     {
@@ -44,7 +44,7 @@ class ConfigureRouterListener
     /**
      * Gets the cache.
      *
-     * @return \Es\Cache\Adapter\AbstractCache The cache
+     * @return \Es\Cache\AbstractCache The cache
      */
     public function getCache()
     {
